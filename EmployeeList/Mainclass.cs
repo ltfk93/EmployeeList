@@ -72,18 +72,23 @@ namespace EmployeeList
                             }
                         case 3:
                             {
+                                Console.Clear();
                                 Console.WriteLine("Type in the first name.");
                                 string firstName = Console.ReadLine();
 
+                                Console.Clear();
                                 Console.WriteLine("Type in the last name.");
                                 string lastName = Console.ReadLine();
 
+                                Console.Clear();
                                 Console.WriteLine("Type in the new first name.");
                                 string newFirstName = Console.ReadLine();
 
+                                Console.Clear();
                                 Console.WriteLine("Type in the new last name.");
                                 string newLastName = Console.ReadLine();
 
+                                Console.Clear();
                                 dBHandler.editPerson(firstName, lastName, newFirstName, newLastName);
 
                                 Console.WriteLine("Press a key to return to the menu");
@@ -93,12 +98,15 @@ namespace EmployeeList
                             }
                         case 4:
                             {
+                                Console.Clear();
                                 Console.WriteLine("Type in the first name.");
                                 string firstName = Console.ReadLine();
 
+                                Console.Clear();
                                 Console.WriteLine("Type in the last name.");
                                 string lastName = Console.ReadLine();
 
+                                Console.Clear();
                                 dBHandler.removePerson(firstName, lastName);
 
                                 Console.WriteLine("Press a key to return to the menu");
@@ -108,6 +116,7 @@ namespace EmployeeList
                             }
                         case 5:
                             {
+                                Console.Clear();
                                 dBHandler.deleteTable();
                                 Console.WriteLine("Press a key to return to the menu");
                                 Console.ReadKey();
@@ -121,7 +130,10 @@ namespace EmployeeList
                             }
                         default:
                             {
+                                Console.Clear();
                                 Console.WriteLine("Invalid input provided. Please provide a valid number from the list");
+                                Console.ReadKey();
+                                printMenu();
                                 break;
                             }
 

@@ -41,12 +41,7 @@ namespace EmployeeList.Logic
             if(exists(firstName, lastName))
             {
                 string query = $"DELETE FROM Person WHERE firstName ='{firstName}' AND lastName = '{lastName}';";
-                _command.CommandType = CommandType.Text;
-                _command.CommandText = query;
-                _command.Connection = _connection;
-                _connection.Open();
-                _command.ExecuteNonQuery();
-                _connection.Close();
+                executeQuery(query);
 
                 Console.WriteLine($"{firstName} {lastName} has been removed from the list.");
                 return true;
@@ -69,12 +64,7 @@ namespace EmployeeList.Logic
                 {
                     validInput = true;
                     string query = $"DELETE FROM Person;";
-                    _command.CommandType = CommandType.Text;
-                    _command.CommandText = query;
-                    _command.Connection = _connection;
-                    _connection.Open();
-                    _command.ExecuteNonQuery();
-                    _connection.Close();
+                    executeQuery(query);
 
                     Console.WriteLine("The person table has been cleared.");
                 }
@@ -97,12 +87,7 @@ namespace EmployeeList.Logic
             if(exists(firstName, lastName))
             {
                 string query = $"UPDATE Person SET firstName = '{newFirstName}', lastName = '{newLastName}' WHERE firstName ='{firstName}' AND lastName = '{lastName}';";
-                _command.CommandType = CommandType.Text;
-                _command.CommandText = query;
-                _command.Connection = _connection;
-                _connection.Open();
-                _command.ExecuteNonQuery();
-                _connection.Close();
+                executeQuery(query);
 
                 Console.WriteLine($"The name of {firstName} {lastName} has been changed to {newFirstName} {newLastName}");
                 return true;
@@ -116,12 +101,7 @@ namespace EmployeeList.Logic
         {
             //string query = $"INSERT INTO Person(firstName,lastName,age) VALUES('" + firstNameInput + "', '" + lastNameInput + "', '" + ageInput + "')";
             string query2 = $"INSERT INTO Person(firstName,lastName,age) VALUES('{firstNameInput}', '{lastNameInput}', '{ageInput}')" ;
-            _command.CommandType = CommandType.Text;
-            _command.CommandText = query2;
-            _command.Connection = _connection;
-            _connection.Open();
-            _command.ExecuteNonQuery();
-            _connection.Close();
+            executeQuery(query2);
         }
         public bool exists(string firstName, string lastName)
         {
@@ -156,7 +136,15 @@ namespace EmployeeList.Logic
 
             return list;
         }
-
+        public void executeQuery(string queryText)
+        {
+            _command.CommandType = CommandType.Text;
+            _command.CommandText = queryText;
+            _command.Connection = _connection;
+            _connection.Open();
+            _command.ExecuteNonQuery();
+            _connection.Close();
+        }
         public void printList()
         {
             List<Person> personList = GetList();
