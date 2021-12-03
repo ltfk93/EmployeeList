@@ -58,8 +58,20 @@ namespace EmployeeList
 
                                 Console.Clear();
                                 Console.WriteLine("Type in the age.");
+                                bool validNumber = false;
                                 int age = 0;
-                                int.TryParse(Console.ReadLine(),out age);
+                                do
+                                {
+                                    if(!int.TryParse(Console.ReadLine(), out age))
+                                    {
+                                        Console.WriteLine("Invalid number provided! Please type in the age in numbers");
+                                    }
+                                    else
+                                    {
+                                        validNumber = true;
+                                    }
+                                }
+                                while(!validNumber);
 
                                 Console.Clear();
                                 dBHandler.addPerson(firstName, lastName, age);
@@ -138,6 +150,13 @@ namespace EmployeeList
                             }
 
                     }
+                }
+                else
+                {
+                    Console.Clear();
+                    Console.WriteLine("Invalid input provided. Please provide a valid number from the list");
+                    Console.ReadKey();
+                    printMenu();
                 }
             }
             while (startProgram != -1);
