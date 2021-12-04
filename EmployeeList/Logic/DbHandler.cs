@@ -142,7 +142,19 @@ namespace EmployeeList.Logic
             _command.CommandText = queryText;
             _command.Connection = _connection;
             _connection.Open();
-            _command.ExecuteNonQuery();
+            if(queryText.ToLower().Contains("select"))
+            {
+                _reader = _command.ExecuteReader();
+
+                while (_reader.Read())
+                {
+                    Console.WriteLine($"FirstName: {_reader.GetString(1)}\nLastName: {_reader.GetString(2)}\nAge: {_reader.GetInt32(3)}");
+                }
+            }
+            else
+            {
+                _command.ExecuteNonQuery();
+            }
             _connection.Close();
         }
         public void printList()
